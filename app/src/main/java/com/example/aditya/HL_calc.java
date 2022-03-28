@@ -47,7 +47,7 @@ public class HL_calc extends AppCompatActivity {
                     arr[i] = -1;
                     input_no.setText("Numbers: ");
                     for (int j = 0; j < 15 && arr[j] != -1; j++) {
-                        input_no.setText(input_no.getText() + Integer.toString(arr[j]));
+                        input_no.setText(input_no.getText() + ", " + Integer.toString(arr[j]));
                     }
                 }
             }
@@ -56,14 +56,14 @@ public class HL_calc extends AppCompatActivity {
         hcf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                result.setText("HCF is: " + hcf_calc(arr));
+                result.setText("HCF is: " + hcf_lcm_calc(arr, "hcf"));
             }
         });
 
         lcm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                result.setText(("LCM is: "));
+                result.setText(("LCM is: " + hcf_lcm_calc(arr, "lcm")));
             }
         });
     }
@@ -75,19 +75,19 @@ public class HL_calc extends AppCompatActivity {
         return -1;
     }
 
-    private int hcf_calc(int[] arr){
+    private int hcf_lcm_calc(int[] arr, String check){
         int j = 1;
-        int cur_hcf = arr[0];
+        int cur_hcf_lcm = arr[0];
         while (j < 15 && arr[j] != -1){
-            int a = Math.max(cur_hcf, arr[j]), b = Math.min(cur_hcf, arr[j]);
+            int a = Math.max(cur_hcf_lcm, arr[j]), b = Math.min(cur_hcf_lcm, arr[j]);
             while(b > 0) {
                 int c = a % b;
                 a = b;
                 b = c;
             }
+            cur_hcf_lcm = check == "hcf" ? a : cur_hcf_lcm * arr[j] / a;
             j++;
-            cur_hcf = a;
         }
-        return cur_hcf;
+        return cur_hcf_lcm;
     }
 }
