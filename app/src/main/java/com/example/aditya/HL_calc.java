@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class HL_calc extends AppCompatActivity {
+
+    public static int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,36 +19,75 @@ public class HL_calc extends AppCompatActivity {
 
         Button hcf = findViewById(R.id.HCF);
         Button lcm = findViewById(R.id.LCM);
-        EditText no1 = findViewById(R.id.HLno1);
-        EditText no2 = findViewById(R.id.HLno2);
+        Button nextNo = findViewById(R.id.nextNo);
+        Button clear_no = findViewById(R.id.clear_no);
+        EditText no = findViewById(R.id.HLno);
         TextView result = findViewById(R.id.textView3);
+        TextView input_no = findViewById(R.id.input_no);
+
+        int[] arr = new int[]{-1, -1 , -1, -1 ,-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+
+        nextNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                arr[i] = nextInput(no);
+                if (arr[i] != -1) {
+                    input_no.setText(input_no.getText() + ", " + Integer.toString((arr[i])));
+                    i++;
+                }
+                no.setText("");
+            }
+        });
+
+        clear_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (i != 0) {
+                    i--;
+                    arr[i] = -1;
+                    input_no.setText("Numbers: ");
+                    for (int j = 0; j < 15 && arr[j] != -1; j++) {
+                        input_no.setText(input_no.getText() + Integer.toString(arr[j]));
+                    }
+                }
+            }
+        });
 
         hcf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int a = Integer.parseInt(no1.getText().toString());
-                int b = Integer.parseInt(no2.getText().toString());
-
-                result.setText("HCF is: " + Integer.toString(hcf_calc(Math.max(a,b),Math.min(a,b))));
+                result.setText("HCF is: " + hcf_calc(arr));
             }
         });
 
         lcm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int a = Integer.parseInt(no1.getText().toString());
-                int b = Integer.parseInt(no2.getText().toString());
-
-                result.setText("LCM is: " + Integer.toString(a*b / hcf_calc(Math.max(a,b),Math.min(a,b))));
+                result.setText(("LCM is: "));
             }
         });
     }
-    private int hcf_calc(int c, int d){
-        while (d != 0){
-            int e = c%d;
-            c = d;
-            d = e;
+
+    private int nextInput(EditText no){
+        if (!no.getText().toString().isEmpty()) {
+            return Integer.parseInt(no.getText().toString());
         }
-        return c;
+        return -1;
+    }
+
+    private int hcf_calc(int[] arr){
+        int j = 1;
+        int cur_hcf = arr[0];
+        while (j < 15 && arr[j] != -1){
+            int a = Math.max(cur_hcf, arr[j]), b = Math.min(cur_hcf, arr[j]);
+            while(b > 0) {
+                int c = a % b;
+                a = b;
+                b = c;
+            }
+            j++;
+            cur_hcf = a;
+        }
+        return cur_hcf;
     }
 }

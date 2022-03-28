@@ -19,49 +19,40 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/HLno1"
+        android:id="@+id/HLno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="132dp"
         android:ems="10"
-        android:hint="enter first number"
+        android:hint="enter the numbers"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/input_no"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <EditText
-        android:id="@+id/HLno2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="enter second number"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/HLno1"
-        app:layout_constraintTop_toBottomOf="@+id/HLno1" />
 
     <Button
         android:id="@+id/HCF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="176dp"
         android:text="HCF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HLno2" />
+        app:layout_constraintTop_toBottomOf="@+id/HLno" />
 
     <Button
         android:id="@+id/LCM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="108dp"
         android:text="LCM"
+        app:layout_constraintBottom_toBottomOf="@+id/HCF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/HCF"
-        app:layout_constraintTop_toBottomOf="@+id/HLno2" />
+        app:layout_constraintTop_toBottomOf="@+id/HLno"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -71,8 +62,37 @@
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HCF"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.289" />
+
+    <TextView
+        android:id="@+id/input_no"
+        android:layout_width="276dp"
+        android:layout_height="73dp"
+        android:text="Numbers : "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/HLno"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/nextNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter next number"
+        app:layout_constraintBottom_toTopOf="@+id/HCF"
+        app:layout_constraintStart_toStartOf="@+id/HLno"
+        app:layout_constraintTop_toBottomOf="@+id/HLno"
+        app:layout_constraintVertical_bias="0.265" />
+
+    <Button
+        android:id="@+id/clear_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Clear last number"
+        app:layout_constraintStart_toStartOf="@+id/nextNo"
+        app:layout_constraintTop_toBottomOf="@+id/nextNo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
